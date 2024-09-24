@@ -9,7 +9,6 @@ namespace TextFormatter{
     use SilverStripe\ORM\ArrayList;
     use SilverStripe\ORM\FieldType\DBField;
     use SilverStripe\View\ArrayData;
-    use function TextFormatter\_t;
 
     class TextFormatter
     {
@@ -58,14 +57,6 @@ namespace TextFormatter{
                     'OpeningTag' => '[c]',
                     'ClosingTag' => '[/c]',
                     'FrontendOpeningTag' => '<span class="clr-primary">',
-                    'FrontendClosingTag' => '</span>',
-                ],
-                'LightColor' => [
-                    'Title' => _t(__CLASS__ . '.COLOR_TITLE', 'Helle Primärfarbe'),
-                    'Description' => _t(__CLASS__ . '.COLOR_DESCRIPTION', 'Ändert die Textfarbe zur Hellen Primärfarbe'),
-                    'OpeningTag' => '[lightblue]',
-                    'ClosingTag' => '[/lightblue]',
-                    'FrontendOpeningTag' => '<span class="clr-primary-light">',
                     'FrontendClosingTag' => '</span>',
                 ],
                 'OptionalLineBreak' => [
@@ -169,57 +160,6 @@ namespace TextFormatter{
 
             return (new \SilverStripe\View\ArrayData($data))->renderWith('TextFormatterDescription');
         }
-
-
-        /*public static function getFormattingDescription($keys = [], CacheInterface $cache = null)
-        {
-            $instance = new self($cache);
-
-            // Tags filtern, falls bestimmte Schlüssel angegeben wurden
-            if (!empty($keys)) {
-                $filteredTags = array_filter($instance->tags, function($value, $key) use ($keys) {
-                    return in_array($key, $keys);
-                }, ARRAY_FILTER_USE_BOTH);
-            } else {
-                $filteredTags = $instance->tags;
-            }
-
-            $description = '<p>' . _t(__CLASS__ . '.DESCRIPTION', 'Die folgenden Formatierungen können im Text verwendet werden:') . '</p><dialog>';
-            $description .= '<ul>';
-
-            foreach ($filteredTags as $key => $value) {
-                $description .= '<li>';
-                $description .= '<strong>' . $value['Title'] . ':</strong>';
-                $description .= '<br>';
-                $description .= '<span>' . $value['Description'] . '</span>';
-                $description .= '<br>';
-
-                if (isset($value['ClosingTag'])) {
-                    $description .= _t(__CLASS__ . '.OPENING_TAG', 'Öffnender Tag') . ': ' . $value['OpeningTag'] . '<br>';
-                    $description .= _t(__CLASS__ . '.CLOSING_TAG', 'Schließender Tag') . ': ' . $value['ClosingTag'];
-                } else {
-                    $description .= _t(__CLASS__ . '.SINGLE_TAG', 'Tag') . ': ' . $value['OpeningTag'] . '<br>';
-                }
-
-                $description .= '</li>';
-            }
-
-            $description .= '</ul><button class="btn btn-primary" autofocus>Schließen</button></dialog><button class="btn btn-primary">Show the dialog</button><script>const dialog = document.querySelector("dialog");
-const showButton = document.querySelector("dialog + button");
-const closeButton = document.querySelector("dialog button");
-
-// "Show the dialog" button opens the dialog modally
-showButton.addEventListener("click", () => {
-  dialog.showModal();
-});
-
-// "Close" button closes the dialog
-closeButton.addEventListener("click", () => {
-  dialog.close();
-});
-</script>';
-            return $description;
-        }*/
 
         public static function getFormattingTip(){
             $description = self::getFormattingDescription();
