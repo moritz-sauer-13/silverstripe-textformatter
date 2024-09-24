@@ -13,8 +13,9 @@ To display the Formatting hint in the CMS simply add this in you getCMSFields:
 $fields->dataFieldByName('Title')->setDescription(TextFormatter::getFormattingDescription());
 
 To output the formatted Text in the Frontend you need a special function like this one: 
+```
 public function FrontendTitle()
 {
   return TextFormatter::formattedText($this->Title);
 }
-
+```
